@@ -16,4 +16,7 @@ public:
     // Additional functions as needed
 };
 
+std::vector<Recipe> searchRecipes(const std::string& searchQuery) const;
+
+
 #endif // COOKBOOK_H

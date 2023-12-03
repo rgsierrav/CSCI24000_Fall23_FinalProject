@@ -26,4 +26,15 @@ void Cookbook::removeRecipe(const std::string& recipeName) {
         recipes.end());
 }
 
+std::vector<Recipe> Cookbook::searchRecipes(const std::string& searchQuery) const {
+    std::vector<Recipe> foundRecipes;
+    for (const auto& recipe : recipes) {
+        if (recipe.getName().find(searchQuery) != std::string::npos) {
+            foundRecipes.push_back(recipe);
+        }
+    }
+    return foundRecipes;
+}
+
+
 // Implement additional functions as needed
