@@ -1,29 +1,41 @@
 #include "Cookbook.h"
+#include <iostream>
 #include <algorithm>
+#include <stdexcept>
 
 Cookbook::Cookbook() {
     // Constructor implementation (if needed)
 }
 
 void Cookbook::addRecipe(const Recipe& recipe) {
-    recipes.push_back(recipe);
+    // Check for duplicate recipe names before adding
+    auto it = std::find_if(recipes.begin(), recipes.end(),
+                           [&](const Recipe& r) { return r.getName() == recipe.getName(); });
+    if (it == recipes.end()) {
+        recipes.push_back(recipe);
+    } else {
+        std::cout << "Recipe with the same name already exists." << std::endl;
+    }
 }
 
 Recipe Cookbook::getRecipe(const std::string& recipeName) const {
-    for (const auto& recipe : recipes) {
-        if (recipe.getName() == recipeName) {
-            return recipe;
-        }
+    auto it = std::find_if(recipes.begin(), recipes.end(),
+                           [&](const Recipe& recipe) { return recipe.getName() == recipeName; });
+    if (it != recipes.end()) {
+        return *it;
+    } else {
+        throw std::runtime_error("Recipe not found.");
     }
-    // Handle the case where the recipe is not found
-    // This could be throwing an exception or returning a default Recipe object
 }
 
-void Cookbook::removeRecipe(const std::string& recipeName) {
-    recipes.erase(
-        std::remove_if(recipes.begin(), recipes.end(), 
-                       [&](const Recipe& recipe) { return recipe.getName() == recipeName; }),
-        recipes.end());
+bool Cookbook::removeRecipe(const std::string& recipeName) {
+    auto it = std::remove_if(recipes.begin(), recipes.end(), 
+                             [&](const Recipe& recipe) { return recipe.getName() == recipeName; });
+    if (it != recipes.end()) {
+        recipes.erase(it, recipes.end());
+        return true; // Indicates successful removal
+    }
+    return false; // Recipe not found
 }
 
 std::vector<Recipe> Cookbook::searchRecipes(const std::string& searchQuery) const {
@@ -35,6 +47,5 @@ std::vector<Recipe> Cookbook::searchRecipes(const std::string& searchQuery) cons
     }
     return foundRecipes;
 }
-
 
 // Implement additional functions as needed

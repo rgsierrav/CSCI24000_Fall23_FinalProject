@@ -10,7 +10,13 @@ std::string Ingredient::getName() const {
 }
 
 void Ingredient::setQuantity(double newQuantity) {
-    quantity = newQuantity;
+    if (newQuantity >= 0) {
+        quantity = newQuantity;
+    } else {
+        // Handle negative quantity, possibly with an error message or by setting it to zero
+        std::cerr << "Quantity cannot be negative. Setting quantity to 0." << std::endl;
+        quantity = 0;
+    }
 }
 
 double Ingredient::getQuantity() const {

@@ -6,8 +6,7 @@
 class Ingredient {
 private:
     std::string name;
-    double quantity;
-    // Add more attributes if needed, like unit of measurement
+    double quantity; // Consider adding a unit of measurement attribute if needed
 
 public:
     Ingredient(const std::string& name, double quantity);
