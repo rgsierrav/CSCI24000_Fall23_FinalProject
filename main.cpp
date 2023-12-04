@@ -179,7 +179,10 @@ int main() {
                     cout << "Recipe Name: " << recipe.getName() << endl;
                     cout << "Ingredients:" << endl;
                     for (const auto& ingredient : recipe.getIngredients()) {
-                        cout << "- " << ingredient.getName() << ", " << ingredient.getQuantity() << endl;
+                        std::ostringstream ingredientStream;
+                        ingredientStream << ingredient.getQuantity() << " " << ingredient.getName();
+                        std::string ingredientDisplay = ingredientStream.str();
+                        cout << "- " << ingredientDisplay << endl;
                     }
                     cout << "Directions: " << recipe.getDirections() << endl;
                     cout << "Calories: " << recipe.getCalories() << endl;
