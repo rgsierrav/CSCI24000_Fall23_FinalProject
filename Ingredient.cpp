@@ -29,4 +29,6 @@ double Ingredient::getQuantity() const {
     return quantity;
 }
 
-// Implement additional methods as needed
+std::string Ingredient::getName() const {
+    return name;
+}
