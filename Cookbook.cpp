@@ -56,4 +56,10 @@ std::vector<Recipe> Cookbook::searchRecipes(const std::string& searchQuery) cons
     return foundRecipes;
 }
 
-// Implement additional functions as needed
+std::vector<std::string> Cookbook::getAllRecipeNames() const {
+    std::vector<std::string> names;
+    for (const auto& recipe : recipes) {
+        names.push_back(recipe.getName());
+    }
+    return names;
+}

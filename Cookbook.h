@@ -16,7 +16,7 @@ public:
     bool removeRecipe(const std::string& recipeName);
     std::vector<Recipe> searchRecipes(const std::string& searchQuery) const;
     int getTotalCalories() const;
-    // Additional functions as needed
+    std::vector<std::string> getAllRecipeNames() const; // Add this line
 };
 
 #endif // COOKBOOK_H

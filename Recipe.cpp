@@ -47,3 +47,7 @@ void Recipe::displayRecipe() const {
     }
     std::cout << "Directions " << directions << std::endl;
 }
+
+const std::vector<Ingredient>& Recipe::getIngredients() const {
+    return ingredients;
+}

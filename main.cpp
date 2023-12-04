@@ -147,10 +147,49 @@ int main() {
                 cout << "Recipe added successfully!\n";
                 break;
             }
-            case 2:
-                // View Recipe functionality
-                // Implement the logic to view a recipe
+            case 2: {
+                // List all recipes
+                vector<string> recipeNames = myCookbook.getAllRecipeNames();
+                if (recipeNames.empty()) {
+                    cout << "No recipes available." << endl;
+                    break;
+                }
+
+                cout << "Available Recipes:" << endl;
+                for (size_t i = 0; i < recipeNames.size(); ++i) {
+                    cout << i + 1 << ": " << recipeNames[i] << endl;
+                }
+
+                // Ask the user to choose a recipe
+                cout << "Enter the number of the recipe you want to view: ";
+                size_t recipeNumber;
+                cin >> recipeNumber;
+
+                // Validate input
+                if (cin.fail() || recipeNumber < 1 || recipeNumber > recipeNames.size()) {
+                    clearCin();
+                    cout << "Invalid input. Please enter a valid number." << endl;
+                    break;
+                }
+
+                try {
+                    // Retrieve and display the recipe
+                    string selectedRecipeName = recipeNames[recipeNumber - 1];
+                    Recipe recipe = myCookbook.getRecipe(selectedRecipeName);
+
+                    cout << "Recipe Name: " << recipe.getName() << endl;
+                    cout << "Ingredients:" << endl;
+                    for (const auto& ingredient : recipe.getIngredients()) {
+                        cout << "- " << ingredient.getName() << ", " << ingredient.getQuantity() << endl;
+                    }
+                    cout << "Directions: " << recipe.getDirections() << endl;
+                    cout << "Calories: " << recipe.getCalories() << endl;
+                } catch (const std::runtime_error& e) {
+                    cout << "An error occurred: " << e.what() << endl;
+                }
+
                 break;
+            }
             case 3:
                 // Search Recipes functionality
                 // Implement the logic to search for recipes

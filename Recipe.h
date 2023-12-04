@@ -21,8 +21,8 @@ public:
     bool removeIngredient(const std::string& ingredientName);
     void displayRecipe() const;
     std::string getDirections() const;
+    const std::vector<Ingredient>& getIngredients() const; // Add this line
 
-    // Additional methods as needed
 };
 
 #endif // RECIPE_H
