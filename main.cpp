@@ -23,17 +23,32 @@ std::string readJsonFile(const std::string& filename) {
 // Function to convert a string into a vector of Ingredient objects
 std::vector<Ingredient> convertToIngredients(const std::string& ingredientsString) {
     std::vector<Ingredient> ingredientList;
+    std::istringstream iss(ingredientsString);
+    std::string line;
 
-    // Parse the ingredients string into a json object
-    auto ingredients = json::parse(ingredientsString);
+    while (std::getline(iss, line)) {
+        // Assuming each line is formatted as 'quantity unit ingredient_name'
+        std::istringstream lineStream(line);
+        double quantity;
+        std::string unit, ingredientName;
 
-    // Iterate over the parsed json object
-    for (const auto& item : ingredients) {
-        Ingredient ingredientObj(item["name"].get<std::string>(), item["quantity"].get<double>());
+        lineStream >> quantity >> unit;
+        std::getline(lineStream, ingredientName);
+        ingredientName = unit + " " + ingredientName;
+
+        Ingredient ingredientObj(ingredientName, quantity);
         ingredientList.push_back(ingredientObj);
     }
 
     return ingredientList;
+}
+
+// Function to extract the first numerical value from a string
+int extractCalories(const std::string& calorieString) {
+    std::istringstream iss(calorieString);
+    int calories;
+    iss >> calories;
+    return calories;
 }
 
 // Function to parse JSON and add recipes to the cookbook
@@ -44,7 +59,7 @@ void parseJson(Cookbook& cookbook, const std::string& jsonString) {
         std::string recipeName = item["Recipe Name"];
         std::vector<Ingredient> ingredients = convertToIngredients(item["Ingredients"]);
         std::string directions = item["Directions"];
-        int calories = item["Calories"];
+        int calories = extractCalories(item["Calories"]);
 
         // Add the recipe to the cookbook
         Recipe recipe(recipeName, ingredients, directions, calories);
