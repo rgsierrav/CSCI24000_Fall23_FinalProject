@@ -5,16 +5,15 @@
 
 class Ingredient {
 private:
-    std::string name;
-    double quantity; 
-    void parseDescription(const std::string& fullDescription);
+    std::string ingredientLine; // Stores the entire ingredient line
 
 public:
-    explicit Ingredient(const std::string& fullDescription);
+    explicit Ingredient(const std::string& line);
+    std::string getIngredientLine() const;
+
+    // If you still need these methods, declare them here
     std::string getName() const;
-    void setQuantity(double newQuantity);
     double getQuantity() const;
-    // Additional methods as needed
 };
 
 #endif // INGREDIENT_H
