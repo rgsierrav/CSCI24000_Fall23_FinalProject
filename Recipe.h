@@ -17,6 +17,9 @@ public:
     void addIngredient(const Ingredient& ingredient);
     std::string getSteps() const;
     bool removeIngredient(const std::string& ingredientName);
+    void displayRecipe() const;
+
+    // Additional methods as needed
 };
 
 #endif // RECIPE_H
