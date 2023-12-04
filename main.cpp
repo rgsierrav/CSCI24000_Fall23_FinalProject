@@ -27,21 +27,20 @@ std::vector<Ingredient> convertToIngredients(const std::string& ingredientsStrin
     std::string line;
 
     while (std::getline(iss, line)) {
-        // Assuming each line is formatted as 'quantity unit ingredient_name'
         std::istringstream lineStream(line);
         double quantity;
         std::string unit, ingredientName;
 
         lineStream >> quantity >> unit;
-        std::getline(lineStream, ingredientName);
-        ingredientName = unit + " " + ingredientName;
+        std::getline(lineStream, ingredientName); // Get the rest of the line as the ingredient name
+        ingredientName = unit + ingredientName; // Concatenate unit and name
 
-        Ingredient ingredientObj(ingredientName, quantity);
-        ingredientList.push_back(ingredientObj);
+        ingredientList.push_back(Ingredient(ingredientName, quantity));
     }
 
     return ingredientList;
 }
+
 
 // Function to extract the first numerical value from a string
 int extractCalories(const std::string& calorieString) {
