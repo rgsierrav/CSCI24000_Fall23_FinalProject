@@ -70,7 +70,7 @@ void parseJson(Cookbook& cookbook, const std::string& jsonString) {
 // Function to display the menu
 void displayMenu() {
     cout << "\nDigital Cookbook" << endl;
-    cout << "1. Add Recipe" << endl;
+    cout << "1. Add a Recipe" << endl;
     cout << "2. View Recipe" << endl;
     cout << "3. Search Recipes" << endl;
     cout << "4. Exit" << endl;
@@ -101,8 +101,67 @@ int main() {
             continue;
         }
 
-        // Implement the rest of your menu functionality here
-        // ...
+        switch (choice) {
+            case 1: {
+                // Add Recipe functionality
+                string recipeName, directions, ingredientLine;
+                int calories;
+                vector<Ingredient> ingredients;
+
+                cout << "Enter recipe name: ";
+                cin.ignore();  // Clear the newline character left in the buffer
+                getline(cin, recipeName);
+
+                cout << "Enter ingredients (type 'done' when finished):\n";
+                while (true) {
+                    cout << "Enter ingredient (name quantity): ";
+                    getline(cin, ingredientLine);
+                    if (ingredientLine == "done") {
+                        break;
+                    }
+                    // Parse the ingredient line here and add to ingredients vector
+                    // This is a simplified example. You'll need to parse the line properly.
+                    ingredients.push_back(Ingredient(ingredientLine, 1)); // Modify as per your Ingredient class constructor
+                }
+
+                // Get directions
+                cout << "Enter directions (type 'END' on a new line to finish):" << endl;
+                directions.clear();
+                string line;
+                while (getline(cin, line)) {
+                    if (line == "END") {
+                        break;
+                    }
+                    directions += line + "\n";
+                }
+
+                // Get calories
+                cout << "Enter calories: ";
+                cin >> calories;
+                cin.ignore();  // Clear the newline character left in the buffer after reading calories
+
+                // Create a new recipe and add it to the cookbook
+                Recipe newRecipe(recipeName, ingredients, directions, calories);
+                myCookbook.addRecipe(newRecipe);
+
+                cout << "Recipe added successfully!\n";
+                break;
+            }
+            case 2:
+                // View Recipe functionality
+                // Implement the logic to view a recipe
+                break;
+            case 3:
+                // Search Recipes functionality
+                // Implement the logic to search for recipes
+                break;
+            case 4:
+                cout << "Exiting program." << endl;
+                return 0;
+            default:
+                cout << "Invalid choice. Please try again." << endl;
+                break;
+        }
     }
 
     return 0;
