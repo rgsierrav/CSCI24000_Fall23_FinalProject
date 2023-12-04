@@ -18,7 +18,28 @@ void Ingredient::parseDescription(const std::string& fullDescription) {
         } else {
             // Convert quantityStr to a number
             std::istringstream iss(quantityStr);
-            iss >> quantity;
+
+            // Custom logic to handle fractions or mixed numbers
+            double num = 0.0;
+            double den = 1.0;
+            char slash;
+
+            iss >> num;
+            iss >> slash;
+            if (iss >> den) {
+                // Successfully parsed a fraction
+                quantity = num / den;
+            } else {
+                // Parsing as a simple number
+                quantity = num;
+            }
+
+            // Convert decimal quantity to a fraction for display
+            fractions::Fraction frac(quantity);
+            std::ostringstream oss;
+            oss << frac;
+
+            quantityStr = oss.str();
         }
     } else {
         // Handle the case where there's no space (e.g., just a name without quantity)
@@ -26,7 +47,6 @@ void Ingredient::parseDescription(const std::string& fullDescription) {
         quantity = 0;
     }
 }
-
 
 void Ingredient::setQuantity(double newQuantity) {
     if (newQuantity >= 0) {
