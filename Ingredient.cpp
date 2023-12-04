@@ -1,13 +1,18 @@
 #include "Ingredient.h"
-#include <iostream> // Add this line
+#include <sstream>
+#include <iostream>
 
-Ingredient::Ingredient(const std::string& name, double quantity)
-    : name(name), quantity(quantity) {
-    // Constructor implementation
+Ingredient::Ingredient(const std::string& fullDescription) {
+    parseDescription(fullDescription);
 }
 
-std::string Ingredient::getName() const {
-    return name;
+void Ingredient::parseDescription(const std::string& fullDescription) {
+    // Example parsing logic (you will need to adjust this based on your specific format)
+    std::istringstream iss(fullDescription);
+    iss >> quantity;
+    iss.ignore(); // Ignore the space between quantity and name
+    std::getline(iss, name);
+    // Trim leading whitespace from name, if necessary
 }
 
 void Ingredient::setQuantity(double newQuantity) {

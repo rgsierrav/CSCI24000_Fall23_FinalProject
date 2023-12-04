@@ -6,10 +6,11 @@
 class Ingredient {
 private:
     std::string name;
-    double quantity; // Consider adding a unit of measurement attribute if needed
+    double quantity; 
+    void parseDescription(const std::string& fullDescription);
 
 public:
-    Ingredient(const std::string& name, double quantity);
+    explicit Ingredient(const std::string& fullDescription);
     std::string getName() const;
     void setQuantity(double newQuantity);
     double getQuantity() const;

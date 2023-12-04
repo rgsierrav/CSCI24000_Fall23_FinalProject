@@ -28,19 +28,32 @@ std::vector<Ingredient> convertToIngredients(const std::string& ingredientsStrin
 
     while (std::getline(iss, line)) {
         std::istringstream lineStream(line);
-        double quantity;
-        std::string unit, ingredientName;
+        std::string quantity, restOfLine, ingredientName;
 
-        lineStream >> quantity >> unit;
-        std::getline(lineStream, ingredientName); // Get the rest of the line as the ingredient name
-        ingredientName = unit + ingredientName; // Concatenate unit and name
+        // Read the quantity (which may include a range like '1-2')
+        lineStream >> quantity;
+        std::getline(lineStream, restOfLine); // Get the rest of the line
 
-        ingredientList.push_back(Ingredient(ingredientName, quantity));
+        // Check if the quantity is a range
+        size_t dashPos = quantity.find('-');
+        if (dashPos != std::string::npos) {
+            // It's a range, keep it as is
+            ingredientName = quantity + restOfLine;
+        } else {
+            // It's a standard quantity, separate quantity and name
+            std::istringstream restStream(restOfLine);
+            std::string unit;
+            restStream >> unit;
+            std::getline(restStream, ingredientName); // Get the rest of the line as the ingredient name
+            ingredientName = unit + ingredientName; // Concatenate unit and name
+            ingredientName = quantity + " " + ingredientName; // Prepend quantity
+        }
+
+        ingredientList.push_back(Ingredient(ingredientName));
     }
 
     return ingredientList;
 }
-
 
 // Function to extract the first numerical value from a string
 int extractCalories(const std::string& calorieString) {
@@ -113,14 +126,13 @@ int main() {
 
                 cout << "Enter ingredients (type 'done' when finished):\n";
                 while (true) {
-                    cout << "Enter ingredient (name quantity): ";
+                    cout << "Enter ingredient (quantity and name): ";
                     getline(cin, ingredientLine);
                     if (ingredientLine == "done") {
                         break;
                     }
-                    // Parse the ingredient line here and add to ingredients vector
-                    // This is a simplified example. You'll need to parse the line properly.
-                    ingredients.push_back(Ingredient(ingredientLine, 1)); // Modify as per your Ingredient class constructor
+                    // Add the ingredient to the ingredients vector
+                    ingredients.push_back(Ingredient(ingredientLine));
                 }
 
                 // Get directions
