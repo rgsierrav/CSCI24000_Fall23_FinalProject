@@ -2,8 +2,8 @@
 #include <iostream>
 #include <algorithm>
 
-Recipe::Recipe(const std::string& name, const std::vector<Ingredient>& ingredients, const std::string& steps, int calories)
-    : name(name), ingredients(ingredients), steps(steps), calories(calories) {}
+Recipe::Recipe(const std::string& name, const std::vector<Ingredient>& ingredients, const std::string& directions, int calories)
+    : name(name), ingredients(ingredients), directions(directions), calories(calories) {}
 
 int Recipe::getCalories() const {
     return calories;
@@ -34,8 +34,8 @@ bool Recipe::removeIngredient(const std::string& ingredientName) {
     return false; // Ingredient not found
 }
 
-std::string Recipe::getSteps() const {
-    return steps;
+std::string Recipe::getDirections() const {
+    return directions;
 }
 
 void Recipe::displayRecipe() const {
@@ -44,7 +44,7 @@ void Recipe::displayRecipe() const {
     for (const auto& ingredient : ingredients) {
         std::cout << "- " << ingredient.getName() << ", Quantity: " << ingredient.getQuantity() << std::endl;
     }
-    std::cout << "Preparation Steps: " << steps << std::endl;
+    std::cout << "Directions " << directions << std::endl;
 }
 
 // Implement additional methods as needed

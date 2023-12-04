@@ -20,20 +20,34 @@ std::string readJsonFile(const std::string& filename) {
     return buffer.str();
 }
 
+// Function to convert a string into a vector of Ingredient objects
+std::vector<Ingredient> convertToIngredients(const std::string& ingredientsString) {
+    std::vector<Ingredient> ingredientList;
+
+    // Parse the ingredients string into a json object
+    auto ingredients = json::parse(ingredientsString);
+
+    // Iterate over the parsed json object
+    for (const auto& item : ingredients) {
+        Ingredient ingredientObj(item["name"].get<std::string>(), item["quantity"].get<double>());
+        ingredientList.push_back(ingredientObj);
+    }
+
+    return ingredientList;
+}
+
 // Function to parse JSON and add recipes to the cookbook
 void parseJson(Cookbook& cookbook, const std::string& jsonString) {
     auto j = json::parse(jsonString);
 
     for (const auto& item : j) {
         std::string recipeName = item["Recipe Name"];
-        std::string ingredients = item["Ingredients"];
+        std::vector<Ingredient> ingredients = convertToIngredients(item["Ingredients"]);
         std::string directions = item["Directions"];
+        int calories = item["Calories"];
 
-        // Here, you need to convert the ingredients string to Ingredient objects
-        // For simplicity, let's assume you have a function that does this
-        std::vector<Ingredient> ingredientList = convertToIngredients(ingredients);
-
-        Recipe recipe(recipeName, ingredientList, directions);
+        // Add the recipe to the cookbook
+        Recipe recipe(recipeName, ingredients, directions, calories);
         cookbook.addRecipe(recipe);
     }
 }

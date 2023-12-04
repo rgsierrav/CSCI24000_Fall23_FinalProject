@@ -9,11 +9,13 @@ class Recipe {
 private:
     std::string name;
     std::vector<Ingredient> ingredients;
-    std::string steps;
+    std::string directions;
     int calories;
 
 public:
-    Recipe(const std::string& name, const std::vector<Ingredient>& ingredients, const std::string& steps, int calories);
+    Recipe(const std::string& name, const std::vector<Ingredient>& ingredients, const std::string& directions, int calories)
+        : name(name), ingredients(ingredients), directions(directions), calories(calories) {}
+    std::string getDirections() const;
     int getCalories() const;    std::string getName() const;
     void addIngredient(const Ingredient& ingredient);
     std::string getSteps() const;
