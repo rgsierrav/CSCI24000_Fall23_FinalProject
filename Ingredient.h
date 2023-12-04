@@ -9,7 +9,7 @@ private:
     double quantity; // Consider adding a unit of measurement attribute if needed
 
 public:
-    Ingredient(const std::string& name, double quantity) : name(name), quantity(quantity) {}
+    Ingredient(const std::string& name, double quantity);
     std::string getName() const;
     void setQuantity(double newQuantity);
     double getQuantity() const;
