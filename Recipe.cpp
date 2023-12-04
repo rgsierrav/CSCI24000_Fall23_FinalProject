@@ -3,7 +3,9 @@
 #include <algorithm>
 
 Recipe::Recipe(const std::string& name, const std::vector<Ingredient>& ingredients, const std::string& directions, int calories)
-    : name(name), ingredients(ingredients), directions(directions), calories(calories) {}
+    : name(name), ingredients(ingredients), directions(directions), calories(calories) {
+    // constructor body (if needed)
+}
 
 int Recipe::getCalories() const {
     return calories;
@@ -46,5 +48,3 @@ void Recipe::displayRecipe() const {
     }
     std::cout << "Directions " << directions << std::endl;
 }
-
-// Implement additional methods as needed

@@ -13,14 +13,13 @@ private:
     int calories;
 
 public:
-    Recipe(const std::string& name, const std::vector<Ingredient>& ingredients, const std::string& directions, int calories)
-        : name(name), ingredients(ingredients), directions(directions), calories(calories) {}
-    std::string getDirections() const;
+    Recipe(const std::string& name, const std::vector<Ingredient>& ingredients, const std::string& directions, int calories);
     int getCalories() const;    std::string getName() const;
     void addIngredient(const Ingredient& ingredient);
     std::string getSteps() const;
     bool removeIngredient(const std::string& ingredientName);
     void displayRecipe() const;
+    std::string getDirections() const;
 
     // Additional methods as needed
 };
