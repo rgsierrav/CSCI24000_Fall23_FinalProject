@@ -90,8 +90,7 @@ int main() {
 
                 try {
                     Recipe recipe = myCookbook.getRecipe(recipeName);
-                    // Display recipe details
-                    // ...
+                    recipe.displayRecipe();
                 } catch (const std::exception& e) {
                     cout << "Recipe not found." << endl;
                 }
@@ -110,8 +109,7 @@ int main() {
                 } else {
                     cout << "Found Recipes:" << endl;
                     for (const auto& recipe : foundRecipes) {
-                        cout << recipe.getName() << endl; // Displaying the recipe names
-                        // You can also display more details of each recipe here
+                        cout << recipe.getName() << endl;
                     }
                 }
                 break;

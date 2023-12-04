@@ -17,6 +17,7 @@ public:
     void addIngredient(const Ingredient& ingredient);
     void removeIngredient(const std::string& ingredientName);
     std::string getSteps() const;
+    void displayRecipe() const; // Add this line
     // Additional methods as needed
 };
 

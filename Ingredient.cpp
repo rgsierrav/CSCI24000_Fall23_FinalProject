@@ -1,4 +1,5 @@
 #include "Ingredient.h"
+#include <iostream> // Add this line
 
 Ingredient::Ingredient(const std::string& name, double quantity)
     : name(name), quantity(quantity) {
