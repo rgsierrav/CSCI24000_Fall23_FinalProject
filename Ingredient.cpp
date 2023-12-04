@@ -1,5 +1,6 @@
 #include "Ingredient.h"
 #include <sstream>
+#include <iostream>
 
 // Constructor implementation
 Ingredient::Ingredient(const std::string& line) : ingredientLine(line) {}
@@ -23,4 +24,17 @@ double Ingredient::getQuantity() const {
     double quantity;
     iss >> quantity; // This assumes the quantity is the first part of the string.
     return quantity;
+}
+
+void Ingredient::setQuantity(double newQuantity) {
+    // Check for negative quantity
+    if (newQuantity < 0) {
+        std::cerr << "Quantity cannot be negative." << std::endl;
+        return;
+    }
+
+    // Update the quantity in the ingredientLine
+    std::ostringstream oss;
+    oss << newQuantity << " " << getName(); // Assuming getName() returns the name part
+    ingredientLine = oss.str();
 }

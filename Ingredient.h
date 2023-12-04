@@ -11,7 +11,7 @@ public:
     explicit Ingredient(const std::string& line);
     std::string getIngredientLine() const;
 
-    // If you still need these methods, declare them here
+    void setQuantity(double newQuantity);
     std::string getName() const;
     double getQuantity() const;
 };
