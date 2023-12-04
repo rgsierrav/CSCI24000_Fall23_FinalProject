@@ -15,6 +15,7 @@ public:
     Recipe getRecipe(const std::string& recipeName) const;
     bool removeRecipe(const std::string& recipeName);
     std::vector<Recipe> searchRecipes(const std::string& searchQuery) const;
+    int getTotalCalories() const;
     // Additional functions as needed
 };
 

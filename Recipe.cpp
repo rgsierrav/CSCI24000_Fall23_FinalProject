@@ -2,10 +2,13 @@
 #include <iostream>
 #include <algorithm>
 
-Recipe::Recipe(const std::string& name, const std::vector<Ingredient>& ingredients, const std::string& steps)
-    : name(name), ingredients(ingredients), steps(steps) {
-    // Constructor implementation
+Recipe::Recipe(const std::string& name, const std::vector<Ingredient>& ingredients, const std::string& steps, int calories)
+    : name(name), ingredients(ingredients), steps(steps), calories(calories) {}
+
+int Recipe::getCalories() const {
+    return calories;
 }
+
 
 std::string Recipe::getName() const {
     return name;
