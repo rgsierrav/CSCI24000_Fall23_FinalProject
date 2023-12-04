@@ -21,35 +21,15 @@ std::string readJsonFile(const std::string& filename) {
 }
 
 // Function to convert a string into a vector of Ingredient objects
+// Function to convert a string into a vector of Ingredient objects
 std::vector<Ingredient> convertToIngredients(const std::string& ingredientsString) {
     std::vector<Ingredient> ingredientList;
     std::istringstream iss(ingredientsString);
     std::string line;
 
     while (std::getline(iss, line)) {
-        std::istringstream lineStream(line);
-        std::string quantity, restOfLine, ingredientName;
-
-        // Read the quantity (which may include a range like '1-2')
-        lineStream >> quantity;
-        std::getline(lineStream, restOfLine); // Get the rest of the line
-
-        // Check if the quantity is a range
-        size_t dashPos = quantity.find('-');
-        if (dashPos != std::string::npos) {
-            // It's a range, keep it as is
-            ingredientName = quantity + restOfLine;
-        } else {
-            // It's a standard quantity, separate quantity and name
-            std::istringstream restStream(restOfLine);
-            std::string unit;
-            restStream >> unit;
-            std::getline(restStream, ingredientName); // Get the rest of the line as the ingredient name
-            ingredientName = unit + ingredientName; // Concatenate unit and name
-            ingredientName = quantity + " " + ingredientName; // Prepend quantity
-        }
-
-        ingredientList.push_back(Ingredient(ingredientName));
+        // Directly use the line to create an Ingredient object
+        ingredientList.push_back(Ingredient(line));
     }
 
     return ingredientList;

@@ -7,13 +7,26 @@ Ingredient::Ingredient(const std::string& fullDescription) {
 }
 
 void Ingredient::parseDescription(const std::string& fullDescription) {
-    // Example parsing logic (you will need to adjust this based on your specific format)
-    std::istringstream iss(fullDescription);
-    iss >> quantity;
-    iss.ignore(); // Ignore the space between quantity and name
-    std::getline(iss, name);
-    // Trim leading whitespace from name, if necessary
+    size_t spacePos = fullDescription.find(' ');
+    if (spacePos != std::string::npos) {
+        std::string quantityStr = fullDescription.substr(0, spacePos);
+        name = fullDescription.substr(spacePos + 1);
+
+        // Check if quantityStr contains a dash, indicating a range
+        if (quantityStr.find('-') != std::string::npos) {
+            quantity = 0; // Set to 0 or handle differently if a range is not a single value
+        } else {
+            // Convert quantityStr to a number
+            std::istringstream iss(quantityStr);
+            iss >> quantity;
+        }
+    } else {
+        // Handle the case where there's no space (e.g., just a name without quantity)
+        name = fullDescription;
+        quantity = 0;
+    }
 }
+
 
 void Ingredient::setQuantity(double newQuantity) {
     if (newQuantity >= 0) {
