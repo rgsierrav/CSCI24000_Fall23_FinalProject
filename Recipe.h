@@ -15,10 +15,8 @@ public:
     Recipe(const std::string& name, const std::vector<Ingredient>& ingredients, const std::string& steps);
     std::string getName() const;
     void addIngredient(const Ingredient& ingredient);
-    void removeIngredient(const std::string& ingredientName);
     std::string getSteps() const;
-    void displayRecipe() const; // Add this line
-    // Additional methods as needed
+    bool removeIngredient(const std::string& ingredientName);
 };
 
 #endif // RECIPE_H
