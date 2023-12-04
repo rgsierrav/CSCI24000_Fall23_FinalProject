@@ -11,7 +11,6 @@ int Recipe::getCalories() const {
     return calories;
 }
 
-
 std::string Recipe::getName() const {
     return name;
 }
