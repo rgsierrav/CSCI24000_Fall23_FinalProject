@@ -106,11 +106,12 @@ int main() {
 
                 cout << "Enter ingredients (type 'done' when finished):\n";
                 while (true) {
-                    cout << "Enter ingredient: ";
+                    cout << "Enter ingredient (quantity and name): ";
                     getline(cin, ingredientLine);
                     if (ingredientLine == "done") {
                         break;
                     }
+                    // Add the ingredient to the ingredients vector
                     ingredients.push_back(Ingredient(ingredientLine));
                 }
 
@@ -170,7 +171,10 @@ int main() {
                     cout << "Recipe Name: " << recipe.getName() << endl;
                     cout << "Ingredients:" << endl;
                     for (const auto& ingredient : recipe.getIngredients()) {
-                        cout << "- " << ingredient.getIngredientLine() << endl;
+                        std::ostringstream ingredientStream;
+                        ingredientStream << ingredient.getQuantity() << " " << ingredient.getName();
+                        std::string ingredientDisplay = ingredientStream.str();
+                        cout << "- " << ingredientDisplay << endl;
                     }
                     cout << "Directions: " << recipe.getDirections() << endl;
                     cout << "Calories: " << recipe.getCalories() << endl;

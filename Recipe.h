@@ -19,17 +19,7 @@ public:
     void addIngredient(const Ingredient& ingredient);
     std::string getSteps() const;
     bool removeIngredient(const std::string& ingredientName);
-    void displayRecipe() const {
-        std::cout << "Recipe Name: " << name << std::endl;
-        std::cout << "Ingredients:" << std::endl;
-        for (const auto& ingredient : ingredients) {
-            std::cout << "- " << ingredient.getIngredientLine() << std::endl;
-        }
-        std::cout << "Directions:" << std::endl;
-        std::cout << directions << std::endl;
-        std::cout << "Calories: " << calories << std::endl;
-    }
-
+    void displayRecipe() const;
     std::string getDirections() const;
     const std::vector<Ingredient>& getIngredients() const; // Add this line
 
