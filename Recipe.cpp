@@ -1,18 +1,6 @@
 #include "Recipe.h"
 #include <iostream>
 #include <algorithm>
-#include <sstream>
-
-void Recipe::displayRecipe() const {
-    std::cout << "Recipe Name: " << name << std::endl;
-    std::cout << "Ingredients:" << std::endl;
-
-    for (const auto& ingredient : ingredients) {
-        std::cout << "- " << ingredient.getQuantity() << " " << ingredient.getName() << std::endl;
-    }
-
-    std::cout << "Directions: " << directions << std::endl;
-}
 
 Recipe::Recipe(const std::string& name, const std::vector<Ingredient>& ingredients, const std::string& directions, int calories)
     : name(name), ingredients(ingredients), directions(directions), calories(calories) {
@@ -49,6 +37,15 @@ bool Recipe::removeIngredient(const std::string& ingredientName) {
 
 std::string Recipe::getDirections() const {
     return directions;
+}
+
+void Recipe::displayRecipe() const {
+    std::cout << "Recipe Name: " << name << std::endl;
+    std::cout << "Ingredients:" << std::endl;
+    for (const auto& ingredient : ingredients) {
+        std::cout << "- " << ingredient.getName() << ", Quantity: " << ingredient.getQuantity() << std::endl;
+    }
+    std::cout << "Directions " << directions << std::endl;
 }
 
 const std::vector<Ingredient>& Recipe::getIngredients() const {

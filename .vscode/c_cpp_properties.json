@@ -3,7 +3,9 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "C:/Users/rosag/OneDrive/Documents/GitHub/CSCI24000_Fall23_FinalProject/nlohmann"
+
             ],
             "defines": [
                 "_DEBUG",
