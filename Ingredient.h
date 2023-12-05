@@ -2,6 +2,9 @@
 #define INGREDIENT_H
 
 #include <string>
+#include "nlohmann/json.hpp"
+
+using json = nlohmann::json;
 
 class Ingredient {
 private:
@@ -14,6 +17,8 @@ public:
     std::string getName() const;
     void setQuantity(double newQuantity);
     double getQuantity() const;
+    json toJson() const;
+    static Ingredient fromJson(const json& j);
     // Additional methods as needed
 };
 

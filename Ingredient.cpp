@@ -45,3 +45,18 @@ double Ingredient::getQuantity() const {
 std::string Ingredient::getName() const {
     return name;
 }
+
+json Ingredient::toJson() const {
+    return {{"name", name}, {"quantity", quantity}};
+}
+
+Ingredient Ingredient::fromJson(const json& j) {
+    std::string name = j.at("name").get<std::string>();
+    double quantity = j.at("quantity").get<double>();
+
+    // Construct the full description string
+    std::ostringstream fullDescription;
+    fullDescription << quantity << " " << name;
+
+    return Ingredient(fullDescription.str());
+}
