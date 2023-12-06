@@ -4,8 +4,8 @@
 
 Recipe::Recipe(const std::string& name, const std::string& category, const std::string& calories, 
                const std::vector<Ingredient>& ingredients, const std::string& directions)
-    : name(name), category(category), calories(calories), ingredients(ingredients), directions(directions) {
-    // constructor body (if needed)
+    : name(name), category(category), ingredients(ingredients), directions(directions), calories(calories) {
+    // constructor body
 }
 
 std::string Recipe::getCalories() const {

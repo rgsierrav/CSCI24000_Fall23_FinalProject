@@ -16,7 +16,7 @@ private:
 public:
     Recipe(const std::string& name, const std::string& category, const std::string& calories, 
            const std::vector<Ingredient>& ingredients, const std::string& directions);    
-    int getCalories() const;
+    std::string getCalories() const;
     std::string getName() const;
     void addIngredient(const Ingredient& ingredient);
     std::string getSteps() const;

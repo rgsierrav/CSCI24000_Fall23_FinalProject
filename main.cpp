@@ -124,7 +124,11 @@ int main() {
                         break;
                     }
                     // Add the ingredient to the ingredients vector
-                    ingredients.push_back(Ingredient(ingredientLine));
+                    std::istringstream lineStream(ingredientLine);
+                    std::string name, quantity;
+                    getline(lineStream, name, ' '); // Extract name up to the first space
+                    getline(lineStream, quantity);  // Extract the rest as quantity
+                    ingredients.push_back(Ingredient(name, quantity));
                 }
 
                 // Get directions
@@ -144,7 +148,8 @@ int main() {
                 cin.ignore();  // Clear the newline character left in the buffer after reading calories
 
                 // Create a new recipe and add it to the cookbook
-                Recipe newRecipe(recipeName, ingredients, directions, calories);
+                string category;
+                Recipe newRecipe(recipeName, category, to_string(calories), ingredients, directions);
                 myCookbook.addRecipe(newRecipe);
 
                 cout << "Recipe added successfully!\n";
