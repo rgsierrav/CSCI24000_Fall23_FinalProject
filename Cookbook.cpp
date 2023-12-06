@@ -7,13 +7,14 @@ Cookbook::Cookbook() {
     // Constructor implementation (if needed)
 }
 
-int Cookbook::getTotalCalories() const {
-    int totalCalories = 0;
+std::string Cookbook::getTotalCalories() const {
+    std::string calorieInfo;
     for (const auto& recipe : recipes) {
-        totalCalories += recipe.getCalories();
+        calorieInfo += recipe.getName() + ": " + recipe.getCalories() + "\n";
     }
-    return totalCalories;
+    return calorieInfo;
 }
+
 
 void Cookbook::addRecipe(const Recipe& recipe) {
     // Check for duplicate recipe names before adding
