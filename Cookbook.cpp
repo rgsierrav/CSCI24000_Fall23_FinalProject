@@ -2,17 +2,28 @@
 #include <iostream>
 #include <algorithm>
 #include <stdexcept>
+#include <sstream>
 
 Cookbook::Cookbook() {
     // Constructor implementation (if needed)
 }
 
-std::string Cookbook::getTotalCalories() const {
-    std::string calorieInfo;
-    for (const auto& recipe : recipes) {
-        calorieInfo += recipe.getName() + ": " + recipe.getCalories() + "\n";
+int extractNumericCalories(const std::string& calorieString) {
+    std::istringstream iss(calorieString);
+    int calories;
+    if (iss >> calories) {
+        return calories;
+    } else {
+        return 0; // Return 0 if the string does not start with a number
     }
-    return calorieInfo;
+}
+
+int Cookbook::getTotalCalories() const {
+    int totalCalories = 0;
+    for (const auto& recipe : recipes) {
+        totalCalories += extractNumericCalories(recipe.getCalories());
+    }
+    return totalCalories;
 }
 
 
