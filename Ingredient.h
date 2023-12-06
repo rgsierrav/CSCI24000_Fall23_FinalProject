@@ -12,7 +12,11 @@ private:
     std::string quantity;  // Changed to string to accommodate quantities like "2/3 cup"
 
 public:
+    // Constructor for combined quantity and name
+    Ingredient(const std::string& fullDescription);
+    // Constructor for separate quantity and name
     Ingredient(const std::string& name, const std::string& quantity);
+    
     std::string getName() const;
     std::string getQuantity() const;  // Return type changed to string
     json toJson() const;

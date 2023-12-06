@@ -2,9 +2,16 @@
 #include <sstream>
 #include <iostream>
 
-Ingredient::Ingredient(const std::string& name, const std::string& quantity)
-    : name(name), quantity(quantity) {}
+Ingredient::Ingredient(const std::string& fullDescription) {
+    std::istringstream iss(fullDescription);
+    iss >> quantity; // Extract the quantity (assuming it's the first word)
+    std::getline(iss >> std::ws, name); // Extract the rest of the line as the name
+}
 
+Ingredient::Ingredient(const std::string& name, const std::string& quantity)
+    : name(name), quantity(quantity) {
+    // Constructor implementation for separate name and quantity
+}
 
 void Ingredient::setQuantity(const std::string& newQuantity) {
     quantity = newQuantity;

@@ -122,17 +122,28 @@ int main() {
 
                 cout << "Enter ingredients (type 'done' when finished):\n";
                 while (true) {
-                    cout << "Enter ingredient (quantity and name): ";
+                    cout << "Enter ingredient: ";
                     getline(cin, ingredientLine);
                     if (ingredientLine == "done") {
                         break;
                     }
-                    // Add the ingredient to the ingredients vector
-                    std::istringstream lineStream(ingredientLine);
-                    std::string name, quantity;
-                    getline(lineStream, name, ' '); // Extract name up to the first space
-                    getline(lineStream, quantity);  // Extract the rest as quantity
-                    ingredients.push_back(Ingredient(name, quantity));
+
+                    // Check if the ingredientLine contains a space character to determine the input format
+                    size_t spacePos = ingredientLine.find(' ');
+                    if (spacePos != std::string::npos) {
+                        // If there's a space, assume it's in the format "quantity name"
+                        string quantity = ingredientLine.substr(0, spacePos);
+                        string name = ingredientLine.substr(spacePos + 1);
+                        ingredients.push_back(Ingredient(name, quantity));
+                    } else {
+                        // Otherwise, prompt for separate quantity and name
+                        string name, quantity;
+                        cout << "Separate quantity and name (e.g., '2 cups sugar'): ";
+                        cin >> quantity;
+                        cin.ignore();  // Clear the newline character
+                        getline(cin, name);
+                        ingredients.push_back(Ingredient(name, quantity));
+                    }
                 }
 
                 // Get directions
