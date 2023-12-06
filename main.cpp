@@ -216,10 +216,41 @@ int main() {
 
                 break;
             }
-            case 3:
-                // Search Recipes functionality
-                // Implement the logic to search for recipes
+            case 3: {
+                string searchIngredient;
+                cout << "Enter ingredient name to search for recipes: ";
+                cin.ignore(); // Clear the newline character left in the buffer
+                getline(cin, searchIngredient);
+
+                vector<Recipe> foundRecipes = myCookbook.searchRecipesByIngredient(searchIngredient);
+                if (foundRecipes.empty()) {
+                    cout << "No recipes found with ingredient: " << searchIngredient << endl;
+                } else {
+                    cout << "Recipes containing " << searchIngredient << ":" << endl;
+                    for (size_t i = 0; i < foundRecipes.size(); ++i) {
+                        cout << i + 1 << ": " << foundRecipes[i].getName() << endl;
+                    }
+
+                    // Ask the user to choose a recipe to view
+                    cout << "Enter the number of the recipe you want to view, or 0 to cancel: ";
+                    size_t recipeNumber;
+                    cin >> recipeNumber;
+
+                    if (recipeNumber > 0 && recipeNumber <= foundRecipes.size()) {
+                        const auto& selectedRecipe = foundRecipes[recipeNumber - 1];
+                        cout << "Recipe Name: " << selectedRecipe.getName() << endl;
+                        cout << "Ingredients:" << endl;
+                        for (const auto& ingredient : selectedRecipe.getIngredients()) {
+                            cout << "- " << ingredient.getQuantity() << " " << ingredient.getName() << endl;
+                        }
+                        cout << "Directions: " << selectedRecipe.getDirections() << endl;
+                        cout << "Calories: " << selectedRecipe.getCalories() << endl;
+                    } else if (recipeNumber != 0) {
+                        cout << "Invalid selection." << endl;
+                    }
+                }
                 break;
+            }
             case 4:
                 cout << "Exiting program." << endl;
                 return 0;

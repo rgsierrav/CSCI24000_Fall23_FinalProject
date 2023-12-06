@@ -75,3 +75,16 @@ std::vector<std::string> Cookbook::getAllRecipeNames() const {
     }
     return names;
 }
+
+std::vector<Recipe> Cookbook::searchRecipesByIngredient(const std::string& ingredientName) const {
+    std::vector<Recipe> foundRecipes;
+    for (const auto& recipe : recipes) {
+        for (const auto& ingredient : recipe.getIngredients()) {
+            if (ingredient.getName().find(ingredientName) != std::string::npos) {
+                foundRecipes.push_back(recipe);
+                break; // Found the ingredient in this recipe, no need to check further
+            }
+        }
+    }
+    return foundRecipes;
+}

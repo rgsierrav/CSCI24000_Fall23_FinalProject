@@ -17,6 +17,8 @@ public:
     std::vector<Recipe> searchRecipes(const std::string& searchQuery) const;
     int getTotalCalories() const;
     std::vector<std::string> getAllRecipeNames() const; // Add this line
+    std::vector<Recipe> searchRecipesByIngredient(const std::string& ingredientName) const;
+
 };
 
 #endif // COOKBOOK_H
