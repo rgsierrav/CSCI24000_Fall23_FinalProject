@@ -8,12 +8,14 @@
 class Recipe {
 private:
     std::string name;
+    std::string category;  // Add this line
     std::vector<Ingredient> ingredients;
     std::string directions;
-    int calories;
+    std::string calories;
 
 public:
-    Recipe(const std::string& name, const std::vector<Ingredient>& ingredients, const std::string& directions, int calories);
+    Recipe(const std::string& name, const std::string& category, const std::string& calories, 
+           const std::vector<Ingredient>& ingredients, const std::string& directions);    
     int getCalories() const;
     std::string getName() const;
     void addIngredient(const Ingredient& ingredient);

@@ -21,7 +21,6 @@ std::string readJsonFile(const std::string& filename) {
 }
 
 // Function to convert a string into a vector of Ingredient objects
-// Function to convert a string into a vector of Ingredient objects
 std::vector<Ingredient> convertToIngredients(const std::string& ingredientsString) {
     std::vector<Ingredient> ingredientList;
     std::istringstream iss(ingredientsString);
@@ -29,7 +28,11 @@ std::vector<Ingredient> convertToIngredients(const std::string& ingredientsStrin
 
     while (std::getline(iss, line)) {
         // Directly use the line to create an Ingredient object
-        ingredientList.push_back(Ingredient(line));
+        std::istringstream lineStream(line);
+        std::string name, quantity;
+        getline(lineStream, name, ' '); // Extract name up to the first space
+        getline(lineStream, quantity);  // Extract the rest as quantity
+        ingredientList.push_back(Ingredient(name, quantity));
     }
 
     return ingredientList;
@@ -49,15 +52,24 @@ void parseJson(Cookbook& cookbook, const std::string& jsonString) {
 
     for (const auto& item : j) {
         std::string recipeName = item["Recipe Name"];
-        std::vector<Ingredient> ingredients = convertToIngredients(item["Ingredients"]);
-        std::string directions = item["Directions"];
-        int calories = extractCalories(item["Calories"]);
+        std::string category = item["Category"];
+        std::string calories = item["Calories"]; // Now a string
+        std::vector<Ingredient> ingredients;
 
-        // Add the recipe to the cookbook
-        Recipe recipe(recipeName, ingredients, directions, calories);
+        for (const auto& ing : item["Ingredients"]) {
+            std::string name = ing["name"];
+            std::string quantity = ing["quantity"];
+            ingredients.push_back(Ingredient(name, quantity));
+        }
+
+        std::string directions = item["Directions"];
+
+        // Create and add the recipe to the cookbook
+        Recipe recipe(recipeName, category, calories, ingredients, directions);
         cookbook.addRecipe(recipe);
     }
 }
+
 
 // Function to display the menu
 void displayMenu() {
