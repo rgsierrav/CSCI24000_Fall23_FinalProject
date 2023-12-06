@@ -5,7 +5,7 @@
 #include <sstream>
 
 Cookbook::Cookbook() {
-    // Constructor implementation (if needed)
+    // Constructor implementation 
 }
 
 int extractNumericCalories(const std::string& calorieString) {
@@ -25,7 +25,6 @@ int Cookbook::getTotalCalories() const {
     }
     return totalCalories;
 }
-
 
 void Cookbook::addRecipe(const Recipe& recipe) {
     // Check for duplicate recipe names before adding

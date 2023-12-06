@@ -74,7 +74,6 @@ void parseJson(Cookbook& cookbook, const std::string& jsonString) {
     }
 }
 
-
 // Function to display the menu
 void displayMenu() {
     cout << "\nDigital Cookbook" << endl;
@@ -291,7 +290,6 @@ int main() {
             case 5:
                 cout << "Exiting program." << endl;
                 return 0;
-
             default:
                 cout << "Invalid choice. Please try again." << endl;
                 break;
