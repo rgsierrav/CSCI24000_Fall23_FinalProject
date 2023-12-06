@@ -3,18 +3,11 @@
 #include <iostream>
 
 Ingredient::Ingredient(const std::string& fullDescription) {
-    parseDescription(fullDescription);
+    this->name = name;
+        this->quantity = quantity;
 }
 
-void Ingredient::parseDescription(const std::string& fullDescription) {
-    size_t spacePos = fullDescription.find(' ');
-    if (spacePos != std::string::npos) {
-        std::string quantityStr = fullDescription.substr(0, spacePos);
-        name = fullDescription.substr(spacePos + 1);
-
-        // Check if quantityStr contains a dash, indicating a range
-        if (quantityStr.find('-') != std::string::npos) {
-            quantity = 0; // Set to 0 or handle differently if a range is not a single value
+// Removed parseDescription method as it's no longer needed with the new JSON structure
         } else {
             // Convert quantityStr to a number
             std::istringstream iss(quantityStr);

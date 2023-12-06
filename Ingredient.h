@@ -1,4 +1,4 @@
-#ifndef INGREDIENT_H
+Nstd::string quantity;  // Changed to string to accommodate quantities like "2/3 cupIngredient(const std::string& name, const std::string& quantity);
 #define INGREDIENT_H
 
 #include <string>
@@ -9,14 +9,14 @@ using json = nlohmann::json;
 class Ingredient {
 private:
     std::string name;
-    double quantity; 
+     std::string quantity;  // Changed to string to accommodate quantities like "2/3 cup"
     void parseDescription(const std::string& fullDescription);
 
 public:
-    explicit Ingredient(const std::string& fullDescription);
+    Ingredient(const std::string& name, const std::string& quantity);
     std::string getName() const;
-    void setQuantity(double newQuantity);
-    double getQuantity() const;
+    std::string getQuantity() const;  // Return type changed to string
+    std::string getQuantity() const;  // Return type changed to string
     json toJson() const;
     static Ingredient fromJson(const json& j);
     // Additional methods as needed
