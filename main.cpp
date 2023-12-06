@@ -80,8 +80,9 @@ void displayMenu() {
     cout << "\nDigital Cookbook" << endl;
     cout << "1. Add a Recipe" << endl;
     cout << "2. View Recipe" << endl;
-    cout << "3. Search Recipes" << endl;
-    cout << "4. Exit" << endl;
+    cout << "3. Search Recipes by Ingredient" << endl;
+    cout << "4. Calculate Total Calories of Selected Recipes" << endl;
+    cout << "5. Exit" << endl;
     cout << "Enter your choice: ";
 }
 
@@ -251,9 +252,46 @@ int main() {
                 }
                 break;
             }
-            case 4:
+            case 4: {
+                cout << "Available Recipes:" << endl;
+                vector<string> recipeNames = myCookbook.getAllRecipeNames();
+                for (size_t i = 0; i < recipeNames.size(); ++i) {
+                    cout << i + 1 << ": " << recipeNames[i] << endl;
+                }
+
+                cout << "\nEnter the numbers of the recipes to calculate total calories (type 0 to finish):" << endl;
+                int choice;
+                int totalCalories = 0;
+
+                while (true) {
+                    cin >> choice;
+                    if (choice == 0) {
+                        break;
+                    }
+                    if (choice > 0 && choice <= static_cast<int>(recipeNames.size())) {
+                        try {
+                            Recipe recipe = myCookbook.getRecipe(recipeNames[choice - 1]);
+                            int recipeCalories = stoi(recipe.getCalories()); // Assuming getCalories() returns a string
+                            cout << "Recipe: " << recipe.getName() << " - Calories: " << recipeCalories << endl;
+                            totalCalories += recipeCalories;
+                        } catch (const std::runtime_error& e) {
+                            cout << "Error: " << e.what() << ". Please try again." << endl;
+                        }
+                    } else {
+                        cout << "Invalid choice. Please try again." << endl;
+                    }
+
+                    // Clear the input buffer
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                }
+
+                cout << "Total Calories: " << totalCalories << endl;
+                break;
+            }
+            case 5:
                 cout << "Exiting program." << endl;
                 return 0;
+
             default:
                 cout << "Invalid choice. Please try again." << endl;
                 break;

@@ -88,3 +88,16 @@ std::vector<Recipe> Cookbook::searchRecipesByIngredient(const std::string& ingre
     }
     return foundRecipes;
 }
+
+int Cookbook::calculateTotalCalories(const std::vector<std::string>& recipeNames) const {
+    int totalCalories = 0;
+    for (const auto& name : recipeNames) {
+        try {
+            Recipe recipe = getRecipe(name);
+            totalCalories += std::stoi(recipe.getCalories());
+        } catch (const std::runtime_error& e) {
+            std::cerr << "Error: " << e.what() << " - Skipping recipe: " << name << std::endl;
+        }
+    }
+    return totalCalories;
+}
