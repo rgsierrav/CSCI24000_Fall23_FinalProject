@@ -27,11 +27,15 @@ std::vector<Ingredient> convertToIngredients(const std::string& ingredientsStrin
     std::string line;
 
     while (std::getline(iss, line)) {
-        // Directly use the line to create an Ingredient object
         std::istringstream lineStream(line);
-        std::string name, quantity;
-        getline(lineStream, name, ' '); // Extract name up to the first space
-        getline(lineStream, quantity);  // Extract the rest as quantity
+        std::string quantity, name;
+
+        // Extract quantity (assuming it's the first part of the line)
+        lineStream >> quantity;
+
+        // Extract the rest of the line as the name
+        std::getline(lineStream >> std::ws, name);
+
         ingredientList.push_back(Ingredient(name, quantity));
     }
 
